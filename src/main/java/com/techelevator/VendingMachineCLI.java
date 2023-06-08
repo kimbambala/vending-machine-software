@@ -30,7 +30,7 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
-		Customer customer = new Customer();
+		Customer customer = new Customer(20);
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
