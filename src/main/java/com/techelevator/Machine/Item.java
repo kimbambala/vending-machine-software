@@ -1,6 +1,7 @@
 package com.techelevator.Machine;
 
 import com.techelevator.CustomerInfo.Customer;
+import com.techelevator.view.Menu;
 
 import java.io.File;
 import java.util.HashMap;
@@ -8,6 +9,11 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Item {
+
+    private static final String SLOT_IDENTIFIER = "A1";
+    private static final String PRODUCT_NAME = "Potato Crisp";
+    private static final String PRODUCT_PRICE = "3.05";
+    private static final String[] ITEM_MENU_OPTIONS = { SLOT_IDENTIFIER, PRODUCT_NAME, PRODUCT_PRICE};
 
     private String name;
     private double price;
@@ -96,6 +102,24 @@ public class Item {
         }
     }*/
 
+    public void onSelection(Customer customer){
+        System.out.println("Current Money Provided: ");
+        while(true) {
 
+            String choice = (String) Menu.getChoiceFromOptions(ITEM_MENU_OPTIONS);
+            if (choice.equals(SLOT_IDENTIFIER)) {
+                //item.onSelection(customer);
+            } else if (choice.equals(PRODUCT_NAME)) {
+                // purchase.onSelection(customer);
+            }else if (choice.equals(PRODUCT_PRICE)) {
+
+            } else if (choice.equals(PRODUCT_PRICE)) {
+                break;
+
+            }
+        }
+
+
+    }
 
 }
