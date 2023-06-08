@@ -3,6 +3,7 @@ package com.techelevator;
 import com.techelevator.CustomerInfo.Customer;
 import com.techelevator.Machine.Item;
 import com.techelevator.Machine.Purchase;
+import com.techelevator.Machine.VendingMachine;
 import com.techelevator.view.Menu;
 
 import java.io.InputStream;
@@ -26,19 +27,21 @@ public class VendingMachineCLI {
 	private Menu menu;
 	private static Purchase purchase = new Purchase();
 	private static Item item = new Item("chips", 2.00, 5);
+	private static VendingMachine vendingMachine = new VendingMachine();
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
 
 	public void run() {
-		Customer customer = new Customer(20);
+		vendingMachine.readFile(new Customer(20, 0));
+		Customer customer = new Customer(20, 0);
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				item.itemDisplay(customer);
+				vendingMachine.readFile(customer);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				purchase.onSelection(customer);
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {

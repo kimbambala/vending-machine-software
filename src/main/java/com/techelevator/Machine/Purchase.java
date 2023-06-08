@@ -14,6 +14,8 @@ public class Purchase {
     private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
     //private int currentMoney;
     private static Item item = new Item();
+    private static VendingMachine vendingMachine = new VendingMachine();
+    private static Customer customer = new Customer(20, 0);
 
 
     public void onSelection(Customer customer){
@@ -22,9 +24,9 @@ public class Purchase {
 
             String choice = (String) Menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
             if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-                //item.onSelection(customer);
+                customer.feedMoney(customer.getBalanceAmount(), customer.getFeedAmount());
             } else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-                item.itemSelection(customer);
+                vendingMachine.itemSelection(customer);
             } else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
                 break;
 

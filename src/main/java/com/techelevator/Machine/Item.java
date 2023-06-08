@@ -3,6 +3,7 @@ package com.techelevator.Machine;
 import com.techelevator.CustomerInfo.Customer;
 import com.techelevator.view.Menu;
 
+import javax.print.DocFlavor;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class Item {
     private String name;
     private double price;
     private int quantity;
-    private Map<String, Item> itemLocation = new HashMap<>();
+
 
     public Item(String name, double price, int quantity){
         this.name = name;
@@ -31,7 +32,7 @@ public class Item {
 
     }
 
-    public String getType(){
+    public String getName(){
         return name;
     }
 
@@ -55,6 +56,8 @@ public class Item {
         this.quantity = quantity;
     }
 
+
+
     public void readFile(Customer customer){
         File itemList = new File("vendingmachine.csv");
         try(Scanner scanner = new Scanner(itemList);){
@@ -63,7 +66,6 @@ public class Item {
                 String [] line = scanner.nextLine().split("\\|");
 
                 System.out.println(line[0] + "|" + line[1] + "|" + line[2] + "| Quantity: " + getQuantity());
-
             }
 
         }catch (Exception ex){
@@ -92,7 +94,7 @@ public class Item {
 
             while(scanner.hasNextLine()){
                 String [] line = scanner.nextLine().split("\\|");
-                double amount = Integer.parseInt(line[2]);
+                double amount = Double.parseDouble(line[2]);
                 if(line[1].equalsIgnoreCase("Potato Crisps")){
                     Chip potatoCrisps = new Chip(line[1], amount, quantity);
                 } else if(line[1].equalsIgnoreCase("Stackers")){
@@ -184,7 +186,7 @@ public class Item {
     public void itemSelection(Customer customer){
         readFile(customer);
 
-        Chip potatoCrisps = new Chip("potato crisps", 3.05, quantity);
+       /* Chip potatoCrisps = new Chip("potato crisps", 3.05, quantity);
         itemLocation.put("A1", potatoCrisps);
 
         System.out.println("Please select an item");
