@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import com.techelevator.CustomerInfo.Customer;
+import com.techelevator.Machine.Item;
+import com.techelevator.Machine.Purchase;
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
@@ -16,20 +19,28 @@ public class VendingMachineCLI {
 	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 
 
+
+
 	private Menu menu;
+	private static Purchase purchase = new Purchase();
+	private static Item item = new Item("chips", 2.00);
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
 
 	public void run() {
+		Customer customer = new Customer();
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				//
+				item.onSelection(customer);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+				purchase.onSelection(customer);
+			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				break;
+
 			}
 		}
 	}

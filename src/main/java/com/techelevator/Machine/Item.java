@@ -1,4 +1,6 @@
-package com.techelevator.view;
+package com.techelevator.Machine;
+
+import com.techelevator.CustomerInfo.Customer;
 
 public class Item {
 
@@ -25,6 +27,10 @@ public class Item {
 
     public void setPrice(double price){
         this.price = price;
+    }
+
+    public  void onSelection(Customer customer){
+        System.out.println("Select an Item");
     }
 
 }
