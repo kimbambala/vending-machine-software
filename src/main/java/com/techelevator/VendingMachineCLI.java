@@ -5,6 +5,8 @@ import com.techelevator.Machine.Item;
 import com.techelevator.Machine.Purchase;
 import com.techelevator.view.Menu;
 
+import java.io.InputStream;
+
 public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
