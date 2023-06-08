@@ -35,7 +35,7 @@ public class Item {
         this.price = price;
     }
 
-    public  void onSelection(Customer customer){
+   /* public  void onSelection(Customer customer){
         System.out.println("Select an Item");
 
         File itemList = new File("vendingmachine.csv");
@@ -94,7 +94,7 @@ public class Item {
         }catch (Exception ex){
             System.out.println("Something's gone wrong.");
         }
-    }
+    }*/
 
 
 
