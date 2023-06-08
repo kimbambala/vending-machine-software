@@ -25,7 +25,7 @@ public class VendingMachineCLI {
 
 	private Menu menu;
 	private static Purchase purchase = new Purchase();
-	private static Item item = new Item("chips", 2.00);
+	private static Item item = new Item("chips", 2.00, 5);
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -38,7 +38,7 @@ public class VendingMachineCLI {
 
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				item.onSelection(customer);
+				item.itemDisplay(customer);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				purchase.onSelection(customer);
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {

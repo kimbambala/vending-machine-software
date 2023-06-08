@@ -6,4 +6,12 @@ public class Customer {
     public Customer(double balanceAmount){
         this.balanceAmount = balanceAmount;
     }
+
+    public double getBalanceAmount(){
+        return balanceAmount;
+    }
+
+    public void setBalanceAmount(double balanceAmount){
+        this.balanceAmount = balanceAmount;
+    }
 }
