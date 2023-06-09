@@ -10,6 +10,15 @@ import java.util.Scanner;
 public class VendingMachine {
 
     private Map<String, Item> itemLocation = new HashMap<>();
+    private double machineMoney;
+    private final double NICKEL = 5;
+    private final double DIME = 10;
+    private final double QUARTER = 25;
+
+    public double smallestChange(){
+
+    }
+
 
 
 
@@ -50,22 +59,27 @@ public class VendingMachine {
         for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
             String key = entry.getKey();
             Item value = entry.getValue();
-            System.out.println(value.getName() + "|" + value.getPrice());
+            System.out.println(value.getName() + "|" + value.getQuantity());
         }
     }
 
     public void itemSelection(Customer customer) {
         readFile(customer);
-        for(Item value : itemLocation.values()){
-            System.out.println(value.toString());
+        for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
+            String key = entry.getKey();
+            Item value = entry.getValue();
+            System.out.println(key + "|" + value.getName());
         }
-
-
-
 
         System.out.println("Please select an item");
         Scanner itemChoice = new Scanner(System.in);
-        String choice = itemChoice.nextLine();
+        String choice = itemChoice.nextLine().toUpperCase();
+
+        if(!itemLocation.containsKey(choice)){
+            System.out.println("Invalid selection");
+            Purchase purchase = new Purchase();
+            purchase.onSelection(customer);
+        }
 
         if(customer.getFeedAmount() < itemLocation.get(choice).getPrice()){
             System.out.println("Sorry! Not enough funds.");

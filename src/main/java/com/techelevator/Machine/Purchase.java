@@ -20,7 +20,7 @@ public class Purchase {
 
 
     public void onSelection(Customer customer){
-       System.out.println("Current Money Provided: ");
+       System.out.println("Current Money Provided: " + customer.getFeedAmount());
         while(true) {
 
             String choice = (String) Menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
@@ -29,6 +29,7 @@ public class Purchase {
             } else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
                 vendingMachine.itemSelection(customer);
             } else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+
                 break;
 
             }
@@ -36,6 +37,8 @@ public class Purchase {
 
 
     }
+
+
 
 
 }
