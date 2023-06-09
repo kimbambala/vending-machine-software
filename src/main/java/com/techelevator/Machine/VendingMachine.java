@@ -80,7 +80,11 @@ public class VendingMachine {
         for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
             String key = entry.getKey();
             Item value = entry.getValue();
-            System.out.println(value.getName() + "|" + value.getQuantity());
+            if(value.getQuantity() > 0) {
+                System.out.println(value.getName() + "| Quantity: " + value.getQuantity());
+            } else{
+                System.out.println(value.getName() + "| SOLD OUT");
+            }
         }
     }
 
@@ -103,7 +107,9 @@ public class VendingMachine {
             purchase.onSelection(customer, this);
         }
 
-        if(customer.getFeedAmount() < itemLocation.get(choice).getPrice()){
+        if(itemLocation.get(choice).getQuantity() == 0){
+            System.out.println("Sorry! Sold out!");
+        } else if(customer.getFeedAmount() < itemLocation.get(choice).getPrice()){
             System.out.println("Sorry! Not enough funds.");
         }else {
             System.out.println("You have selected " + itemLocation.get(choice).getName());
