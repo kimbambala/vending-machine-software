@@ -6,4 +6,6 @@ public class Gum extends Item{
         super(name, price, quantity);
 
     }
+
+
 }

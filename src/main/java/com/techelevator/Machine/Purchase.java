@@ -14,6 +14,7 @@ public class Purchase {
     private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
     //private int currentMoney;
     private static Item item = new Item();
+
     private static VendingMachine vendingMachine = new VendingMachine();
     private static Customer customer = new Customer(20, 0);
 

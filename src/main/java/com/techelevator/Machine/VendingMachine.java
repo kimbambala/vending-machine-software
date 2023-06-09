@@ -11,6 +11,10 @@ public class VendingMachine {
 
     private Map<String, Item> itemLocation = new HashMap<>();
 
+
+
+
+
     public void readFile(Customer customer) {
         File itemList = new File("vendingmachine.csv");
         try (Scanner scanner = new Scanner(itemList);) {
@@ -18,7 +22,7 @@ public class VendingMachine {
             while (scanner.hasNextLine()) {
                 String[] line = scanner.nextLine().split("\\|");
 
-                System.out.println(line[0] + "|" + line[1] + "|" + line[2] + "| Quantity: 5");
+
 
                 double amount = Double.parseDouble(line[2]);
                 int quantity = 5;
@@ -43,7 +47,11 @@ public class VendingMachine {
     }
 
     public void itemDisplay(Customer customer) {
-        readFile(customer);
+        for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
+            String key = entry.getKey();
+            Item value = entry.getValue();
+            System.out.println(value.getName() + "|" + value.getPrice());
+        }
     }
 
     public void itemSelection(Customer customer) {
@@ -62,8 +70,16 @@ public class VendingMachine {
         if(customer.getFeedAmount() < itemLocation.get(choice).getPrice()){
             System.out.println("Sorry! Not enough funds.");
         }else {
-
-            System.out.println("Dispensing " + itemLocation.get(choice).getName());
+            System.out.println("You have selected " + itemLocation.get(choice).getName());
+            if(itemLocation.get(choice) instanceof Chip){
+                System.out.println("Crunch Crunch, Yum!");
+            }else if(itemLocation.get(choice) instanceof Candy){
+                System.out.println("Munch Munch, Yum!");
+            }else if(itemLocation.get(choice) instanceof Drink){
+                System.out.println("Glug Glug, Yum!");
+            }else{
+                System.out.println("Chew Chew, Yum!");
+            }
             System.out.println("Previous balance: " + customer.getFeedAmount());
             double currentBalance = customer.getFeedAmount();
             double newBalance = currentBalance - itemLocation.get(choice).getPrice();
