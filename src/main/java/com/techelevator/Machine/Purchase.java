@@ -29,6 +29,7 @@ public class Purchase {
             } else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
                 vendingMachine.itemSelection(customer);
             } else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+                vendingMachine.calculateChange(customer);
 
                 break;
 

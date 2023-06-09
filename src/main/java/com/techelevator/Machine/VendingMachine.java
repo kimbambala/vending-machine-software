@@ -11,13 +11,41 @@ public class VendingMachine {
 
     private Map<String, Item> itemLocation = new HashMap<>();
     private double machineMoney;
-    private final double NICKEL = 5;
-    private final double DIME = 10;
-    private final double QUARTER = 25;
+    private final double NICKEL = 0.05;
+    private final double DIME = 0.10;
+    private final double QUARTER = 0.25;
 
-    public double smallestChange(){
+
+
+    public double calculateChange(Customer customer){
+        machineMoney = customer.getFeedAmount();
+        int quarterCount = 0;
+        int dimeCounter = 0;
+        int nickelCounter = 0;
+        while ( machineMoney  >= QUARTER){
+           machineMoney  = machineMoney - QUARTER;
+            quarterCount++;
+        }
+        while(machineMoney >= DIME){
+            machineMoney = machineMoney - DIME;
+            dimeCounter++;
+        }
+        while(machineMoney >= NICKEL){
+            machineMoney = machineMoney - NICKEL;
+            nickelCounter++;
+        }
+        if(quarterCount + dimeCounter + nickelCounter == 0){
+            System.out.println("You have no change");
+        }
+        else {
+            System.out.println("Your change is: " + quarterCount + " quarter(s), " + dimeCounter + " dime(s), " + nickelCounter + " nickel(s).");
+        }
+        customer.setBalanceAmount(customer.getBalanceAmount() + customer.getFeedAmount());
+        customer.setFeedAmount(machineMoney);
+        return customer.getFeedAmount();
 
     }
+
 
 
 
@@ -31,11 +59,9 @@ public class VendingMachine {
             while (scanner.hasNextLine()) {
                 String[] line = scanner.nextLine().split("\\|");
 
-
-
                 double amount = Double.parseDouble(line[2]);
-                int quantity = 5;
                 Item item = null;
+                int quantity = 5;
                 if (line[3].equalsIgnoreCase("Chip")) {
                     item = new Chip(line[1], amount, quantity);
                 } else if (line[3].equalsIgnoreCase("Candy")) {
@@ -99,6 +125,7 @@ public class VendingMachine {
             double newBalance = currentBalance - itemLocation.get(choice).getPrice();
             customer.setFeedAmount(newBalance);
             System.out.println("New balance: " + customer.getFeedAmount());
+
             int updatedQuantity = itemLocation.get(choice).getQuantity() - 1;
             itemLocation.get(choice).setQuantity(updatedQuantity);
         }

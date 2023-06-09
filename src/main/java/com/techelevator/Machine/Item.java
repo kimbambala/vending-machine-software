@@ -18,7 +18,7 @@ public class Item {
 
     private String name;
     private double price;
-    private int quantity;
+    private int quantity = 5;
 
 
     public Item(String name, double price, int quantity) {
