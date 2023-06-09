@@ -12,15 +12,11 @@ public class Purchase {
     private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
     private static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTION = "Finish Transaction";
     private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
-    //private int currentMoney;
-    private static Item item = new Item();
-
-    private static VendingMachine vendingMachine = new VendingMachine();
-    private static Customer customer = new Customer(20, 0);
 
 
-    public void onSelection(Customer customer){
-       System.out.println("Current Money Provided: " + customer.getFeedAmount());
+
+    public void onSelection(Customer customer, VendingMachine vendingMachine){
+       System.out.println("Current Money Provided : " + customer.getFeedAmount());
         while(true) {
 
             String choice = (String) Menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);

@@ -26,15 +26,15 @@ public class Customer {
     }
 
     public void feedMoney(double balanceAmount, double feedAmount){
-        if(balanceAmount >= 0){
+        if(balanceAmount > 0){
 
             double updatedBalance = balanceAmount - 1;
             setBalanceAmount(updatedBalance);
-            System.out.println("Money left in Wallet: " + balanceAmount);
+            System.out.println("Money left in Wallet: " + getBalanceAmount());
 
             double updatedFeedAmount = feedAmount + 1;
             setFeedAmount(updatedFeedAmount);
-            System.out.println("Current money provided: " + feedAmount);
+            System.out.println("Current money provided: " + getFeedAmount());
         }else{
             System.out.println("You are out of money!");
         }

@@ -47,11 +47,6 @@ public class VendingMachine {
     }
 
 
-
-
-
-
-
     public void readFile(Customer customer) {
         File itemList = new File("vendingmachine.csv");
         try (Scanner scanner = new Scanner(itemList);) {
@@ -90,7 +85,8 @@ public class VendingMachine {
     }
 
     public void itemSelection(Customer customer) {
-        readFile(customer);
+
+
         for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
             String key = entry.getKey();
             Item value = entry.getValue();
@@ -104,7 +100,7 @@ public class VendingMachine {
         if(!itemLocation.containsKey(choice)){
             System.out.println("Invalid selection");
             Purchase purchase = new Purchase();
-            purchase.onSelection(customer);
+            purchase.onSelection(customer, this);
         }
 
         if(customer.getFeedAmount() < itemLocation.get(choice).getPrice()){
@@ -126,8 +122,11 @@ public class VendingMachine {
             customer.setFeedAmount(newBalance);
             System.out.println("New balance: " + customer.getFeedAmount());
 
+            System.out.println(itemLocation.get(choice).getQuantity());
+
             int updatedQuantity = itemLocation.get(choice).getQuantity() - 1;
             itemLocation.get(choice).setQuantity(updatedQuantity);
+            System.out.println(itemLocation.get(choice).getQuantity());
         }
 
 
