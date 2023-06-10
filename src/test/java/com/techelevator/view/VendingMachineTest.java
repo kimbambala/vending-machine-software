@@ -1,9 +1,14 @@
 package com.techelevator.view;
 
 import com.techelevator.CustomerInfo.Customer;
+import com.techelevator.Machine.Chip;
+import com.techelevator.Machine.Item;
 import com.techelevator.Machine.VendingMachine;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class VendingMachineTest {
 
@@ -43,7 +48,42 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void test_readFile_(){
+    public void test_readFile_is_correct_and_map_is_being_created(){
+        //Arrange
+
+        VendingMachine vendingMachine = new VendingMachine();
+
+
+        //Act
+        vendingMachine.readFile(new Customer(5.00, 6.30));
+
+        Map<String, Item> actualMap = new HashMap<>();
+        actualMap = vendingMachine.getItemLocation();
+
+
+        //Assert
+        Assert.assertEquals("Potato Crisps", actualMap.get("A1").getName());
+        Assert.assertEquals(3.05, actualMap.get("A1").getPrice(), 0.0);
+        Assert.assertEquals(5, actualMap.get("A1").getQuantity());
+    }
+
+    @Test
+    public void test_item_display(){
+
+        //Arrange
+        Customer customer = new Customer(20, 0);
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.readFile(customer);
+
+        //Act
+        Map<String, Item> actualMap = new HashMap<>();
+        actualMap = vendingMachine.getItemLocation();
+        vendingMachine.itemDisplay(customer);
+        String resultName =
+        int expectedQuantity = 5;
+
+        //Assert
+        Assert.assertEquals(expectedQuantity, );
 
     }
 }

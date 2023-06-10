@@ -38,6 +38,10 @@ public class VendingMachine {
         return nickelCounter;
     }
 
+    public Map getItemLocation(){
+        return  itemLocation;
+    }
+
     LocalDateTime date = LocalDateTime.now();
     String dateFormatted = (DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(date));
     String dateReformatted = dateFormatted.replaceAll("-", "/");
