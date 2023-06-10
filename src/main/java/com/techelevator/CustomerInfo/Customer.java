@@ -2,7 +2,15 @@ package com.techelevator.CustomerInfo;
 
 import com.techelevator.Transactionable;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 public class Customer {
     private double balanceAmount = 20;
@@ -30,16 +38,36 @@ public class Customer {
     }
 
     public void feedMoney(double balanceAmount, double feedAmount){
+
+
         if(balanceAmount > 0){
 
             double updatedBalance = balanceAmount - 1;
             setBalanceAmount(updatedBalance);
-            DecimalFormat numberFormat  = new DecimalFormat("#.00");
+            DecimalFormat numberFormat  = new DecimalFormat("0.00");
             System.out.println("Money left in Wallet: " + numberFormat.format(getBalanceAmount()));
 
             double updatedFeedAmount = feedAmount + 1;
             setFeedAmount(updatedFeedAmount);
             System.out.println("Current money provided: " + numberFormat.format(getFeedAmount()));
+
+            LocalDateTime date = LocalDateTime.now();
+            String dateFormatted = (DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(date));
+            String dateReformatted = dateFormatted.replaceAll("-", "/");
+
+
+            SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss a");
+            String timeFormatted = timeFormat.format(new Date()).toString();
+
+
+            File transactionLog = new File("Log.txt");
+            try(PrintWriter feedmoneyOutput = new PrintWriter(new FileOutputStream(transactionLog, true))){
+                feedmoneyOutput.println(dateReformatted + " " + timeFormatted + " FEED MONEY: $1.00 $" + numberFormat.format(getFeedAmount()));
+            }catch(Exception ex){
+                System.out.println("Cannot open file for writing");
+            }
+
+
         }else{
             System.out.println("You are out of money!");
         }

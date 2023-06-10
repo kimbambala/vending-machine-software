@@ -6,26 +6,39 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.time.LocalDate;
 
 public class VendingMachine {
 
     private Map<String, Item> itemLocation = new HashMap<>();
     private double machineMoney;
-    private final double NICKEL = 0.05;
-    private final double DIME = 0.10;
-    private final double QUARTER = 0.25;
+    private final double NICKEL = 5;
+    private final double DIME = 10;
+    private final double QUARTER = 25;
+
+    LocalDateTime date = LocalDateTime.now();
+    String dateFormatted = (DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(date));
+    String dateReformatted = dateFormatted.replaceAll("-", "/");
+
+
+    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss a");
+    String timeFormatted = timeFormat.format(new Date()).toString();
+    DecimalFormat numberFormat = new DecimalFormat("0.00");
+
+    File transactionLog = new File("Log.txt");
+
 
 
 
 
     public double calculateChange(Customer customer){
-        machineMoney = customer.getFeedAmount();
+        machineMoney = (int)(customer.getFeedAmount() * 100);
         int quarterCount = 0;
         int dimeCounter = 0;
         int nickelCounter = 0;
@@ -47,6 +60,14 @@ public class VendingMachine {
         else {
             System.out.println("Your change is: " + quarterCount + " quarter(s), " + dimeCounter + " dime(s), " + nickelCounter + " nickel(s).");
         }
+
+        try(PrintWriter transactionOutput = new PrintWriter(new FileOutputStream(transactionLog, true)) ) {
+            transactionOutput.println(dateReformatted + " " + timeFormatted + " GIVE CHANGE: $" + numberFormat.format(customer.getFeedAmount()) + " $" + numberFormat.format(machineMoney));
+        }
+        catch (Exception ex){
+            System.out.println("Cannot open file for writing");
+        }
+
         customer.setBalanceAmount(customer.getBalanceAmount() + customer.getFeedAmount());
         customer.setFeedAmount(machineMoney);
         return customer.getFeedAmount();
@@ -129,7 +150,7 @@ public class VendingMachine {
             }else{
                 System.out.println("Chew Chew, Yum!");
             }
-            DecimalFormat numberFormat = new DecimalFormat("#.00");
+
             System.out.println("Previous balance: " + numberFormat.format(customer.getFeedAmount()));
             double currentBalance = customer.getFeedAmount();
             double newBalance = currentBalance - itemLocation.get(choice).getPrice();
@@ -144,38 +165,31 @@ public class VendingMachine {
 
 
 
-            DecimalFormat dateFormat = new DecimalFormat("#00");
-            LocalDate date = LocalDate.now();
-            LocalTime time = LocalTime.now();
-            int year = date.getYear();
-            int month = Integer.parseInt(dateFormat.format (date.getMonthValue()));
-            int day = Integer.parseInt(dateFormat.format(date.getDayOfMonth()));
 
 
-            int hour = time.getHour();
-            int minute = time.getMinute();
-            int second = time.getSecond();
-           // String sec = time.format();
 
-            String printDate = month + "/" + day + "/" + year + " " + hour +":" + minute + ":" + second;
+
+
+
+
             String printName = itemLocation.get(choice).getName() +" " + choice;
-            double printAmountSpent = Double.parseDouble(numberFormat.format(itemLocation.get(choice).getPrice()));
-            double printRemainingBalance = Double.parseDouble(numberFormat.format(customer.getFeedAmount()));
+            String printAmountSpent = (numberFormat.format(itemLocation.get(choice).getPrice()));
+            String printRemainingBalance = (numberFormat.format(customer.getFeedAmount()));
 
 
-            File transactionLog = new File("Log.txt");
+
 
             try(PrintWriter transactionOutput = new PrintWriter(new FileOutputStream(transactionLog, true)) ) {
-                transactionOutput.println(printDate + " " + printName + " $" +  printAmountSpent + " $" + printRemainingBalance);
+                transactionOutput.println(dateReformatted + " " + timeFormatted + " " + printName + " $" +  printAmountSpent + " $" + printRemainingBalance);
             }
-            catch (Exception exception){
+            catch (Exception ex){
                 System.out.println("Cannot open file for writing");
             }
 
 
         }
 
-
+       // printDate + " " + printName
 
 
     }
