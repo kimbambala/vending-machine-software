@@ -1,5 +1,9 @@
 package com.techelevator.CustomerInfo;
 
+import com.techelevator.Transactionable;
+
+import java.text.DecimalFormat;
+
 public class Customer {
     private double balanceAmount = 20;
     private double feedAmount;
@@ -30,11 +34,12 @@ public class Customer {
 
             double updatedBalance = balanceAmount - 1;
             setBalanceAmount(updatedBalance);
-            System.out.println("Money left in Wallet: " + getBalanceAmount());
+            DecimalFormat numberFormat  = new DecimalFormat("#.00");
+            System.out.println("Money left in Wallet: " + numberFormat.format(getBalanceAmount()));
 
             double updatedFeedAmount = feedAmount + 1;
             setFeedAmount(updatedFeedAmount);
-            System.out.println("Current money provided: " + getFeedAmount());
+            System.out.println("Current money provided: " + numberFormat.format(getFeedAmount()));
         }else{
             System.out.println("You are out of money!");
         }

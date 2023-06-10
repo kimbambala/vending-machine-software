@@ -3,9 +3,15 @@ package com.techelevator.Machine;
 import com.techelevator.CustomerInfo.Customer;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class VendingMachine {
 
@@ -14,6 +20,7 @@ public class VendingMachine {
     private final double NICKEL = 0.05;
     private final double DIME = 0.10;
     private final double QUARTER = 0.25;
+
 
 
 
@@ -122,19 +129,72 @@ public class VendingMachine {
             }else{
                 System.out.println("Chew Chew, Yum!");
             }
-            System.out.println("Previous balance: " + customer.getFeedAmount());
+            DecimalFormat numberFormat = new DecimalFormat("#.00");
+            System.out.println("Previous balance: " + numberFormat.format(customer.getFeedAmount()));
             double currentBalance = customer.getFeedAmount();
             double newBalance = currentBalance - itemLocation.get(choice).getPrice();
             customer.setFeedAmount(newBalance);
-            System.out.println("New balance: " + customer.getFeedAmount());
+            System.out.println("New balance: " + numberFormat.format(customer.getFeedAmount()));
 
             System.out.println(itemLocation.get(choice).getQuantity());
 
             int updatedQuantity = itemLocation.get(choice).getQuantity() - 1;
             itemLocation.get(choice).setQuantity(updatedQuantity);
             System.out.println(itemLocation.get(choice).getQuantity());
+
+
+
+            DecimalFormat dateFormat = new DecimalFormat("#00");
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            int year = date.getYear();
+            int month = Integer.parseInt(dateFormat.format (date.getMonthValue()));
+            int day = Integer.parseInt(dateFormat.format(date.getDayOfMonth()));
+
+
+            int hour = time.getHour();
+            int minute = time.getMinute();
+            int second = time.getSecond();
+           // String sec = time.format();
+
+            String printDate = month + "/" + day + "/" + year + " " + hour +":" + minute + ":" + second;
+            String printName = itemLocation.get(choice).getName() +" " + choice;
+            double printAmountSpent = Double.parseDouble(numberFormat.format(itemLocation.get(choice).getPrice()));
+            double printRemainingBalance = Double.parseDouble(numberFormat.format(customer.getFeedAmount()));
+
+
+            File transactionLog = new File("Log.txt");
+
+            try(PrintWriter transactionOutput = new PrintWriter(new FileOutputStream(transactionLog, true)) ) {
+                transactionOutput.println(printDate + " " + printName + " $" +  printAmountSpent + " $" + printRemainingBalance);
+            }
+            catch (Exception exception){
+                System.out.println("Cannot open file for writing");
+            }
+
+
         }
 
 
+
+
     }
+    /*public void transactionLog(){
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        File transactionLog = new File("Log.txt");
+
+        try(PrintWriter transactionOutput = new PrintWriter(new FileOutputStream(transactionLog, true)) ) {
+            transactionOutput.print(date + " " + time + " " + itemLocation.get(choice));
+        }
+        catch (Exception exception){
+            System.out.println("Cannot open file for writing");
+        }
+
+
+
+    }*/
+
+
 }
