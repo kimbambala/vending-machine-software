@@ -22,6 +22,22 @@ public class VendingMachine {
     private final double DIME = 10;
     private final double QUARTER = 25;
 
+    private int quarterCount = 0;
+    private int dimeCounter = 0;
+    private int nickelCounter = 0;
+
+    public int getQuarterCount() {
+        return quarterCount;
+    }
+
+    public int getDimeCounter() {
+        return dimeCounter;
+    }
+
+    public int getNickelCounter() {
+        return nickelCounter;
+    }
+
     LocalDateTime date = LocalDateTime.now();
     String dateFormatted = (DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(date));
     String dateReformatted = dateFormatted.replaceAll("-", "/");
@@ -39,9 +55,6 @@ public class VendingMachine {
 
     public double calculateChange(Customer customer){
         machineMoney = (int)(customer.getFeedAmount() * 100);
-        int quarterCount = 0;
-        int dimeCounter = 0;
-        int nickelCounter = 0;
         while ( machineMoney  >= QUARTER){
            machineMoney  = machineMoney - QUARTER;
             quarterCount++;
