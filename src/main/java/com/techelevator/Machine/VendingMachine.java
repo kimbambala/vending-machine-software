@@ -121,20 +121,22 @@ public class VendingMachine {
 
     }
 
-    public void itemDisplay(Customer customer) {
+    public String itemDisplay(Customer customer) {
+        String displayString = "";
         for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
             String key = entry.getKey();
             Item value = entry.getValue();
             if(value.getQuantity() > 0) {
+                displayString = displayString + value.getName() + "| Quantity: " + value.getQuantity();
                 System.out.println(value.getName() + "| Quantity: " + value.getQuantity());
             } else{
                 System.out.println(value.getName() + "| SOLD OUT");
             }
         }
+        return displayString;
     }
 
     public void itemSelection(Customer customer) {
-
 
         for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
             String key = entry.getKey();
@@ -182,17 +184,9 @@ public class VendingMachine {
 
 
 
-
-
-
-
-
-
-
             String printName = itemLocation.get(choice).getName() +" " + choice;
             String printAmountSpent = (numberFormat.format(itemLocation.get(choice).getPrice()));
             String printRemainingBalance = (numberFormat.format(customer.getFeedAmount()));
-
 
 
 

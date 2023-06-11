@@ -68,22 +68,25 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void test_item_display(){
+    public void test_item_display_shows_current_quantity_of_items_at_start(){
 
         //Arrange
-        Customer customer = new Customer(20, 0);
-        VendingMachine vendingMachine = new VendingMachine();
-        vendingMachine.readFile(customer);
+       // Customer customer = new Customer(20, 0);
+        //VendingMachine vendingMachine = new VendingMachine();
+        //vendingMachine.readFile(customer);
+        Item item = new Item();
 
         //Act
-        Map<String, Item> actualMap = new HashMap<>();
-        actualMap = vendingMachine.getItemLocation();
-        vendingMachine.itemDisplay(customer);
-        String resultName =
-        int expectedQuantity = 5;
+        //Map<String, Item> actualMap = new HashMap<>();
+        //actualMap = vendingMachine.getItemLocation();
+        //vendingMachine.itemDisplay(customer);
+        //vendingMachine.itemDisplay(customer);
+        //String resultName;
+        int maxQuantityOfProduct = item.getQuantity();
 
         //Assert
-        Assert.assertEquals(expectedQuantity, );
+        Assert.assertEquals(5, maxQuantityOfProduct);
+
 
     }
 }

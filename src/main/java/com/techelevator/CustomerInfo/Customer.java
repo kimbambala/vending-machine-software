@@ -61,8 +61,8 @@ public class Customer {
 
 
             File transactionLog = new File("Log.txt");
-            try(PrintWriter feedmoneyOutput = new PrintWriter(new FileOutputStream(transactionLog, true))){
-                feedmoneyOutput.println(dateReformatted + " " + timeFormatted + " FEED MONEY: $1.00 $" + numberFormat.format(getFeedAmount()));
+            try(PrintWriter feedMoneyOutput = new PrintWriter(new FileOutputStream(transactionLog, true))){
+                feedMoneyOutput.println(dateReformatted + " " + timeFormatted + " FEED MONEY: $1.00 $" + numberFormat.format(getFeedAmount()));
             }catch(Exception ex){
                 System.out.println("Cannot open file for writing");
             }
