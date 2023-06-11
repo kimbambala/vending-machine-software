@@ -121,19 +121,16 @@ public class VendingMachine {
 
     }
 
-    public String itemDisplay(Customer customer) {
-        String displayString = "";
+    public void itemDisplay(Customer customer) {
         for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
             String key = entry.getKey();
             Item value = entry.getValue();
             if(value.getQuantity() > 0) {
-                displayString = displayString + value.getName() + "| Quantity: " + value.getQuantity();
                 System.out.println(value.getName() + "| Quantity: " + value.getQuantity());
             } else{
                 System.out.println(value.getName() + "| SOLD OUT");
             }
         }
-        return displayString;
     }
 
     public void itemSelection(Customer customer) {
