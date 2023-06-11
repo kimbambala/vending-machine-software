@@ -126,7 +126,7 @@ public class VendingMachine {
             String key = entry.getKey();
             Item value = entry.getValue();
             if(value.getQuantity() > 0) {
-                System.out.println(value.getName() + "| Quantity: " + value.getQuantity());
+                System.out.println(key + "|$" +value.getPrice() + "|" +value.getName() + "|Quantity: " + value.getQuantity());
             } else{
                 System.out.println(value.getName() + "| SOLD OUT");
             }
@@ -167,17 +167,17 @@ public class VendingMachine {
                 System.out.println("Chew Chew, Yum!");
             }
 
-            System.out.println("Previous balance: " + numberFormat.format(customer.getFeedAmount()));
+            System.out.println("Money before purchase: $" + numberFormat.format(customer.getFeedAmount()));
             double currentBalance = customer.getFeedAmount();
             double newBalance = currentBalance - itemLocation.get(choice).getPrice();
+            System.out.println("Cost of item purchased: $"+ numberFormat.format(itemLocation.get(choice).getPrice()));
             customer.setFeedAmount(newBalance);
-            System.out.println("New balance: " + numberFormat.format(customer.getFeedAmount()));
+            System.out.println("Money left to spend: $" + numberFormat.format(customer.getFeedAmount()));
 
-            System.out.println(itemLocation.get(choice).getQuantity());
 
             int updatedQuantity = itemLocation.get(choice).getQuantity() - 1;
             itemLocation.get(choice).setQuantity(updatedQuantity);
-            System.out.println(itemLocation.get(choice).getQuantity());
+
 
 
 

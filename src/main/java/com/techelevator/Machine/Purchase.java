@@ -5,6 +5,7 @@ import com.techelevator.view.Menu;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 
 
 public class Purchase {
@@ -16,7 +17,8 @@ public class Purchase {
 
 
     public void onSelection(Customer customer, VendingMachine vendingMachine){
-       System.out.println("Current Money Provided : " + customer.getFeedAmount());
+        DecimalFormat numberFormat = new DecimalFormat("0.00");
+       System.out.println("Current Money Provided : $" + numberFormat.format(customer.getFeedAmount()));
         while(true) {
 
             String choice = (String) Menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);

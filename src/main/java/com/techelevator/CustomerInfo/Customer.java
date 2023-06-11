@@ -1,7 +1,5 @@
 package com.techelevator.CustomerInfo;
 
-import com.techelevator.Transactionable;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -45,11 +43,11 @@ public class Customer {
             double updatedBalance = balanceAmount - 1;
             setBalanceAmount(updatedBalance);
             DecimalFormat numberFormat  = new DecimalFormat("0.00");
-            System.out.println("Money left in Wallet: " + numberFormat.format(getBalanceAmount()));
+            System.out.println("Money left in Wallet: $" + numberFormat.format(getBalanceAmount()));
 
             double updatedFeedAmount = feedAmount + 1;
             setFeedAmount(updatedFeedAmount);
-            System.out.println("Current money provided: " + numberFormat.format(getFeedAmount()));
+            System.out.println("Current money provided: $" + numberFormat.format(getFeedAmount()));
 
             LocalDateTime date = LocalDateTime.now();
             String dateFormatted = (DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(date));
