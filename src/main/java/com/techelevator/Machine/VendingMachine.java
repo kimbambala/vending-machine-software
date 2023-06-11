@@ -53,6 +53,14 @@ public class VendingMachine {
 
     File transactionLog = new File("Log.txt");
 
+    public String getDateFormatted(){
+        return dateReformatted;
+    }
+
+    public String getTimeFormatted(){
+        return timeFormatted;
+    }
+
 
 
 
