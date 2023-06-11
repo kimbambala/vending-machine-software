@@ -209,6 +209,43 @@ public class VendingMachine {
 
 
     }
+
+    public void salesReport() {
+        String salesDate = dateReformatted.replaceAll("/", "");
+        String salesTime = timeFormatted.replaceAll(":", "");
+        String fileName = salesDate + "_" + salesTime + "_Sales.txt";
+        File salesOutput = new File(fileName);
+        double totalSales = 0;
+
+
+
+        try (PrintWriter salesPrint = new PrintWriter(salesOutput)) {
+            for(Map.Entry<String, Item> entry : itemLocation.entrySet()){
+
+                Item value = entry.getValue();
+                if(value.getQuantity() < 5){
+
+
+                    int numberSold = 5 - value.getQuantity();
+
+                    salesPrint.println(value.getName() + "|" + numberSold);
+                    totalSales = totalSales + (value.getPrice() * numberSold);
+                }
+
+            }
+
+            salesPrint.println("");
+            salesPrint.println("**TOTAL SALES** $" + numberFormat.format(totalSales));
+
+        } catch (Exception ex) {
+            System.out.println("Something went wrong");
+
+        }
+    }
+
+
+
+
     /*public void transactionLog(){
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();

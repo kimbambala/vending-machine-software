@@ -3,7 +3,6 @@ package com.techelevator;
 import com.techelevator.CustomerInfo.Customer;
 import com.techelevator.Machine.Item;
 import com.techelevator.Machine.Purchase;
-import com.techelevator.Machine.SalesReport;
 import com.techelevator.Machine.VendingMachine;
 import com.techelevator.view.Menu;
 
@@ -30,7 +29,6 @@ public class VendingMachineCLI {
 
 	private static VendingMachine vendingMachine = new VendingMachine();
 
-	private static SalesReport salesReport = new SalesReport();
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -50,7 +48,8 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				break;
 			} else if (choice.equals(MAIN_MENU_SECRET_OPTION)) {
-				salesReport.onSelection();
+				vendingMachine.salesReport();
+				break;
 			}
 
 		}
