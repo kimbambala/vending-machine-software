@@ -19,12 +19,13 @@ public class Item {
     private String name;
     private double price;
     private int quantity = 5;
+    private String sound;
 
-
-    public Item(String name, double price, int quantity) {
+    public Item(String name, double price, int quantity, String sound) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.sound = sound;
 
     }
 
@@ -54,6 +55,10 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getSound(){
+        return sound;
     }
 
 

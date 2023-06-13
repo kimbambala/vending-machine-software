@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class VendingMachine {
 
-    private Map<String, Item> itemLocation = new HashMap<>();
+    private Map<String, Item> itemLocation = new TreeMap<>();
     private double machineMoney;
     private final double NICKEL = 5;
     private final double DIME = 10;
@@ -85,9 +85,9 @@ public class VendingMachine {
         else {
             System.out.println("Your change is: " + quarterCount + " quarter(s), " + dimeCounter + " dime(s), " + nickelCounter + " nickel(s).");
         }
-
+        String message = dateReformatted + " " + timeFormatted + " GIVE CHANGE: $" + numberFormat.format(customer.getFeedAmount()) + " $" + numberFormat.format(machineMoney);
         try(PrintWriter transactionOutput = new PrintWriter(new FileOutputStream(transactionLog, true)) ) {
-            transactionOutput.println(dateReformatted + " " + timeFormatted + " GIVE CHANGE: $" + numberFormat.format(customer.getFeedAmount()) + " $" + numberFormat.format(machineMoney));
+            transactionOutput.println(message);
         }
         catch (Exception ex){
             System.out.println("Cannot open file for writing");
@@ -124,7 +124,7 @@ public class VendingMachine {
             }
 
         } catch (Exception ex) {
-            System.out.println("Something went wrong");
+            System.err.println("Something went wrong");
         }
 
     }
@@ -165,14 +165,7 @@ public class VendingMachine {
             System.out.println("Sorry! Not enough funds.");
         }else {
             System.out.println("You have selected " + itemLocation.get(choice).getName());
-            if(itemLocation.get(choice) instanceof Chip){
-                System.out.println("Crunch Crunch, Yum!");
-            }else if(itemLocation.get(choice) instanceof Candy){
-                System.out.println("Munch Munch, Yum!");
-            }else if(itemLocation.get(choice) instanceof Drink){
-                System.out.println("Glug Glug, Yum!");
-            }else{
-                System.out.println("Chew Chew, Yum!");
+            System.out.println(itemLocation.get(choice).getSound());
             }
 
             System.out.println("Money before purchase: $" + numberFormat.format(customer.getFeedAmount()));
@@ -199,7 +192,7 @@ public class VendingMachine {
                 transactionOutput.println(dateReformatted + " " + timeFormatted + " " + printName + " $" +  printAmountSpent + " $" + printRemainingBalance);
             }
             catch (Exception ex){
-                System.out.println("Cannot open file for writing");
+                System.err.println("Cannot open file for writing");
             }
 
 
@@ -208,7 +201,7 @@ public class VendingMachine {
        // printDate + " " + printName
 
 
-    }
+
 
     public void salesReport() {
         String salesDate = dateReformatted.replaceAll("/", "");
@@ -238,7 +231,7 @@ public class VendingMachine {
             salesPrint.println("**TOTAL SALES** $" + numberFormat.format(totalSales));
 
         } catch (Exception ex) {
-            System.out.println("Something went wrong");
+            System.err.println("Something went wrong");
 
         }
     }
